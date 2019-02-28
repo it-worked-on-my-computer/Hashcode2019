@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Photo {
 
-    private int id;
+    private String id;
 
     private Boolean vertical;
 
@@ -12,7 +12,7 @@ public class Photo {
 
     private List<String> tags;
 
-    public Photo(int id, Boolean vertical, Boolean horizontal, List<String> tags) {
+    public Photo(String id, Boolean vertical, Boolean horizontal, List<String> tags) {
         this.id = id;
         this.vertical = vertical;
         this.horizontal = horizontal;
@@ -47,11 +47,11 @@ public class Photo {
         this.tags.add(tag);
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
