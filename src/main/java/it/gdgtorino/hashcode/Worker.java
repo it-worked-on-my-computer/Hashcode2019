@@ -81,8 +81,7 @@ public class Worker {
 
         // Intermediate elaboration
         outputData = new OutputData();
-        outputData.setFirstValue(inputData.getFirstValue() + inputData.getSecondValue());
-        outputData.setSecondValue(inputData.getThirdValue() - inputData.getFourthValue());
+        //outputData.setFirstValue(inputData.getFirstValue() + inputData.getSecondValue());
         System.out.println("Output data created: " + outputData.toString());
 
         // Final output generation

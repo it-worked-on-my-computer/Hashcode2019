@@ -88,9 +88,6 @@ public class Utility {
                 Scanner s = new Scanner(r)) {
             // First line acquisition
             inputData.setFirstValue(s.nextInt());
-            inputData.setSecondValue(s.nextInt());
-            inputData.setThirdValue(s.nextInt());
-            inputData.setFourthValue(s.nextInt());
 
             // Following lines acquisition
             /*

@@ -23,6 +23,10 @@
  */
 package it.gdgtorino.hashcode.io;
 
+import it.gdgtorino.hashcode.model.Photo;
+
+import java.util.List;
+
 /**
  * Wrapper class for input data.
  * Just substitute the local variable with the real ones.
@@ -33,22 +37,19 @@ public class InputData {
 
     // First line values
     private int firstValue;
-    private int secondValue;
-    private int thirdValue;
-    private int fourthValue;
 
     // Following lines data
-    private Object data; // this is just a placeholder for the real data-structure
+    private List<Photo> photosVerticales;
+
+    private List<Photo> photosHorizontales;
 
     public InputData () {
     }
 
-    public InputData (int firstValue, int secondValue, int thirdValue, int fourthValue, Object data) {
+    public InputData (int firstValue, List<Photo> photosVerticales, List<Photo> photosHorizontales) {
         this.firstValue = firstValue;
-        this.secondValue = secondValue;
-        this.thirdValue = thirdValue;
-        this.fourthValue = fourthValue;
-        this.data = data;
+        this.photosVerticales = photosVerticales;
+        this.photosHorizontales = photosHorizontales;
     }
 
     public int getFirstValue () {
@@ -59,43 +60,39 @@ public class InputData {
         this.firstValue = firstValue;
     }
 
-    public int getSecondValue () {
-        return secondValue;
+
+
+    public List<Photo> getPhotosVerticales() {
+        return photosVerticales;
     }
 
-    public void setSecondValue (int secondValue) {
-        this.secondValue = secondValue;
+    public void setPhotosVerticales(List<Photo> photosVerticales) {
+        this.photosVerticales = photosVerticales;
     }
 
-    public int getThirdValue () {
-        return thirdValue;
+    public List<Photo> getPhotosHorizontales() {
+        return photosHorizontales;
     }
 
-    public void setThirdValue (int thirdValue) {
-        this.thirdValue = thirdValue;
+    public void setPhotosHorizontales(List<Photo> photosHorizontales) {
+        this.photosHorizontales = photosHorizontales;
     }
 
-    public int getFourthValue () {
-        return fourthValue;
+    public void addPhotosHorizontales(Photo photoHorizontale) {
+        this.photosHorizontales.add(photoHorizontale);
     }
 
-    public void setFourthValue (int fourthValue) {
-        this.fourthValue = fourthValue;
+    public void addPhotosVerticales(Photo photosVerticale) {
+        this.photosVerticales.add(photosVerticale);
     }
 
-    public Object getData () {
-        return data;
-    }
-
-    public void setData (Object data) {
-        this.data = data;
-    }
 
     @Override
-    public String toString () {
-        return "InputData{" + "firstValue=" + firstValue + ", secondValue=" + secondValue
-                + ", thirdValue=" + thirdValue + ", fourthValue=" + fourthValue + ", data=" + data
-                + '}';
+    public String toString() {
+        return "InputData{" +
+                "firstValue=" + firstValue +
+                ", photosVerticales=" + photosVerticales +
+                ", photosHorizontales=" + photosHorizontales +
+                '}';
     }
-
 }
