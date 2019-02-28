@@ -23,6 +23,10 @@
  */
 package it.gdgtorino.hashcode.io;
 
+import it.gdgtorino.hashcode.model.Slide;
+
+import java.util.List;
+
 /**
  * Wrapper class for output data.
  * Just substitute the local variable with the real ones.
@@ -31,36 +35,10 @@ package it.gdgtorino.hashcode.io;
  */
 public class OutputData {
 
-    private int firstValue;
-    private int secondValue;
+    public List<Slide> slideshow;
 
-    public OutputData () {
-    }
-
-    public OutputData (int firstValue, int secondValue) {
-        this.firstValue = firstValue;
-        this.secondValue = secondValue;
-    }
-
-    public int getFirstValue () {
-        return firstValue;
-    }
-
-    public void setFirstValue (int firstValue) {
-        this.firstValue = firstValue;
-    }
-
-    public int getSecondValue () {
-        return secondValue;
-    }
-
-    public void setSecondValue (int secondValue) {
-        this.secondValue = secondValue;
-    }
-
-    @Override
-    public String toString () {
-        return "OutputData{" + "firstValue=" + firstValue + ", secondValue=" + secondValue + '}';
+    public OutputData ( List<Slide> slideshow ) {
+        this.slideshow = slideshow;
     }
 
 }

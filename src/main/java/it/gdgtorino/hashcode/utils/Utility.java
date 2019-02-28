@@ -143,12 +143,11 @@ public class Utility {
             }
         }
         try (
-                PrintWriter pw = new PrintWriter(file)) { // use of PrintWriter instead of FileWriter
-            pw.println(outputData.getFirstValue());
-            pw.println(outputData.getSecondValue());
-            /*
-             * In this section the remaining lines of the output file are created
-             */
+            PrintWriter pw = new PrintWriter(file)) { // use of PrintWriter instead of FileWriter
+            pw.println( outputData.slideshow.size() );
+            for( Slide slide : outputData.slideshow ){
+                pw.println( slide.id );
+            }
         } catch (IOException ex) {
             System.err.println(MSG_ERR_FIND_OUTPUT_FILE);
             throw new RuntimeException(MSG_ERR_FIND_OUTPUT_FILE, ex);

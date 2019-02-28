@@ -25,7 +25,10 @@ package it.gdgtorino.hashcode;
 
 import it.gdgtorino.hashcode.io.InputData;
 import it.gdgtorino.hashcode.io.OutputData;
+import it.gdgtorino.hashcode.model.Slide;
 import it.gdgtorino.hashcode.utils.Utility;
+
+import java.util.List;
 
 /**
  * The Worker class contains the implementation of the real algorithm; all the "magic" happens here.
@@ -77,8 +80,10 @@ public class Worker {
         // Initial input acquisition
         inputData = utils.read(inputFile);
 
+        List<Slide> slideshow = new SlideTreeWorker( inputData ).walk();
+
         // Intermediate elaboration
-        outputData = new OutputData();
+        outputData = new OutputData(slideshow);
         //outputData.setFirstValue(inputData.getFirstValue() + inputData.getSecondValue());
         System.out.println("Output data created: " + outputData.toString());
 

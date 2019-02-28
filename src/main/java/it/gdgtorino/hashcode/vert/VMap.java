@@ -12,13 +12,12 @@ import it.gdgtorino.hashcode.model.Vertex;
 
 public class VMap {
 
-	Map<Integer, Node> computeVMap(final List<Photo> images) {
+	Map<String, Node> computeVMap(final List<Photo> images) {
 		
-		Map<Integer, Node> vmap = new HashMap<>();
+		Map<String, Node> vmap = new HashMap<>();
 		
 		for(Photo image : images) {
-			Node node = new Node<Photo>();
-			node.element = image;
+			Node node = new Node<Photo>(image.getId(), image);
 			vmap.put(image.getId(), node);
 			
 			for(Photo image1 : images) {
