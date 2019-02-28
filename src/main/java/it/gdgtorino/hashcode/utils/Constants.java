@@ -31,8 +31,16 @@ package it.gdgtorino.hashcode.utils;
  */
 public final class Constants {
     // File paths
-    public static final String INPUT_FILENAME = "input/a_example.txt";
-    public static final String OUTPUT_FILENAME = "example.out";
+    public static final String INPUT_FILENAME1 = "input/a_example.txt";
+    public static final String INPUT_FILENAME2 = "input/b_lovely_landscapes.txt";
+    public static final String INPUT_FILENAME3 = "input/c_memorable_moments.txt";
+    public static final String INPUT_FILENAME4 = "input/d_pet_pictures.txt";
+    public static final String INPUT_FILENAME5 = "input/e_shiny_selfies.txt";
+    public static final String OUTPUT_FILENAME1 = "a.out";
+    public static final String OUTPUT_FILENAME2 = "b.out";
+    public static final String OUTPUT_FILENAME3 = "c.out";
+    public static final String OUTPUT_FILENAME4 = "d.out";
+    public static final String OUTPUT_FILENAME5 = "e.out";
     
     // Error messages
     public static final String MSG_ERR_FIND_INPUT_FILE = "Unable to find the input file";

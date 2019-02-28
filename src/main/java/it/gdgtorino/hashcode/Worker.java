@@ -27,8 +27,6 @@ import it.gdgtorino.hashcode.io.InputData;
 import it.gdgtorino.hashcode.io.OutputData;
 import it.gdgtorino.hashcode.utils.Utility;
 
-import static it.gdgtorino.hashcode.utils.Constants.INPUT_FILENAME;
-
 /**
  * The Worker class contains the implementation of the real algorithm; all the "magic" happens here.
  * Please note that this is a Singleton class and indeed the inner class WorkerHolder actually holds
@@ -73,11 +71,11 @@ public class Worker {
      * 2. intermediate elaboration;
      * 3. output generation phase.
      */
-    public void execute () {
-        System.out.println("Main execution starts for " + INPUT_FILENAME + " file");
+    public void execute (String inputFile, String outputFile) {
+        System.out.println("Main execution starts for " + inputFile + " file");
 
         // Initial input acquisition
-        inputData = utils.read();
+        inputData = utils.read(inputFile);
 
         // Intermediate elaboration
         outputData = new OutputData();
@@ -85,7 +83,7 @@ public class Worker {
         System.out.println("Output data created: " + outputData.toString());
 
         // Final output generation
-        utils.write(outputData);
+        utils.write(outputData, outputFile);
 
         System.out.println("Main execution correctly completed");
     }

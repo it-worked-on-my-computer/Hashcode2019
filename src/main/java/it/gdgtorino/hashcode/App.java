@@ -1,5 +1,7 @@
 package it.gdgtorino.hashcode;
 
+import it.gdgtorino.hashcode.utils.Constants;
+
 /*
  * The MIT License
  *
@@ -33,6 +35,10 @@ public class App {
 
     public static void main (String[] args) {
         Worker worker = Worker.getInstance(); // the worker class executes the real algorithm
-        worker.execute();
+        worker.execute(Constants.INPUT_FILENAME1, Constants.OUTPUT_FILENAME1);
+        worker.execute(Constants.INPUT_FILENAME2, Constants.OUTPUT_FILENAME2);
+        worker.execute(Constants.INPUT_FILENAME3, Constants.OUTPUT_FILENAME3);
+        worker.execute(Constants.INPUT_FILENAME4, Constants.OUTPUT_FILENAME4);
+        worker.execute(Constants.INPUT_FILENAME5, Constants.OUTPUT_FILENAME5);
     }
 }
