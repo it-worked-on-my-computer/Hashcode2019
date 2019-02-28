@@ -23,20 +23,20 @@
  */
 package it.gdgtorino.hashcode.utils;
 
-import it.gdgtorino.hashcode.io.InputData;
-import it.gdgtorino.hashcode.io.OutputData;
-import it.gdgtorino.hashcode.model.Photo;
-
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Reader;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
-import static it.gdgtorino.hashcode.utils.Constants.INPUT_FILENAME;
-import static it.gdgtorino.hashcode.utils.Constants.OUTPUT_FILENAME;
+import it.gdgtorino.hashcode.io.InputData;
+import it.gdgtorino.hashcode.io.OutputData;
+import it.gdgtorino.hashcode.model.Photo;
+import it.gdgtorino.hashcode.model.Slide;
+
 import static it.gdgtorino.hashcode.utils.Constants.MSG_ERR_FIND_INPUT_FILE;
 import static it.gdgtorino.hashcode.utils.Constants.MSG_ERR_CREATE_OUTPUT_FILE;
 import static it.gdgtorino.hashcode.utils.Constants.MSG_ERR_FIND_OUTPUT_FILE;
@@ -80,12 +80,12 @@ public class Utility {
      *
      * @return InputData
      */
-    public InputData read () {
+    public InputData read (String inputFile) {
         InputData inputData = new InputData(); // input wrapper initialization
 
         // Input acquisition phase starts here
         ClassLoader classLoader = getClass().getClassLoader(); // classloader useful to localize the file
-        File file = new File(classLoader.getResource(INPUT_FILENAME).getFile()); // file loading
+        File file = new File(classLoader.getResource(inputFile).getFile()); // file loading
         try (
             Reader r = new FileReader(file);
             Scanner s = new Scanner(r)) {
@@ -131,9 +131,9 @@ public class Utility {
      * @param outputData the OutputData instance that contains the information to be printed in the
      *                   output file.
      */
-    public void write (OutputData outputData) {
+    public void write (OutputData outputData, String outputFile) {
         // Output acquisition phase starts here
-        File file = new File(OUTPUT_FILENAME); // file loading
+        File file = new File(outputFile); // file loading
         if (!file.exists()) { // if the file doesn't exist create a new one
             try {
                 file.createNewFile();
@@ -156,4 +156,31 @@ public class Utility {
 
         System.out.println("Output data file completed");
     }
+
+	public int getScore(List<Slide> slides) {
+		int resultat = 0;
+		for (int i = 0; i < slides.size() - 1; i++) {
+			resultat += calculateScore(slides.get(i), slides.get(i + 1));
+		}
+		return resultat;
+	}
+
+	public int calculateScore(Slide slide1, Slide slide2) {
+		int tagCommun = 0;
+		int tagIndep1 = 0;
+		int tagIndep2 = 0;
+		int resultat = 0;
+		for (String tag : slide1.tags) {
+			if (slide2.tags.contains(tag)) {
+				tagCommun++;
+			}
+		}
+		tagIndep1 = slide1.tags.size() - tagCommun;
+		tagIndep2 = slide2.tags.size() - tagCommun;
+
+		resultat = Math.min(tagIndep1, tagCommun);
+		resultat = Math.min(tagIndep2, resultat);
+
+		return resultat;
+	}
 }
