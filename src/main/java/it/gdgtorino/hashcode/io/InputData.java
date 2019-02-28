@@ -45,10 +45,6 @@ public class InputData {
     private List<Photo> photosHorizontales;
 
     public InputData () {
-    }
-
-    public InputData (int firstValue, List<Photo> photosVerticales, List<Photo> photosHorizontales) {
-        this.firstValue = firstValue;
         this.photosVerticales = new ArrayList<Photo>();
         this.photosHorizontales = new ArrayList<Photo>();
     }

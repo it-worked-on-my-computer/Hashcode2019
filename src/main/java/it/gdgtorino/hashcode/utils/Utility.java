@@ -85,7 +85,9 @@ public class Utility {
 
         // Input acquisition phase starts here
         ClassLoader classLoader = getClass().getClassLoader(); // classloader useful to localize the file
+
         File file = new File(classLoader.getResource(INPUT_FILENAME).getFile()); // file loading
+
         try (
             Reader r = new FileReader(file);
             Scanner s = new Scanner(r)) {

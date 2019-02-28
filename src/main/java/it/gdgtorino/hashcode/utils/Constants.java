@@ -31,7 +31,7 @@ package it.gdgtorino.hashcode.utils;
  */
 public final class Constants {
     // File paths
-    public static final String INPUT_FILENAME = "resources/input/a_example.txt";
+    public static final String INPUT_FILENAME = "input/a_example.txt";
     public static final String OUTPUT_FILENAME = "example.out";
     
     // Error messages
