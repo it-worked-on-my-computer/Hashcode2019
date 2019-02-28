@@ -88,8 +88,8 @@ public class InputData {
     public String toString() {
         return "InputData{" +
                 "firstValue=" + firstValue +
-                ", photosVerticales=" + photosVerticales +
-                ", photosHorizontales=" + photosHorizontales +
+                ", photosVerticales=" + photosVerticales.toString() +
+                ", photosHorizontales=" + photosHorizontales.toString() +
                 '}';
     }
 }
