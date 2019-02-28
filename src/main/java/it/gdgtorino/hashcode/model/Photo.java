@@ -3,13 +3,17 @@ package it.gdgtorino.hashcode.model;
 import java.util.List;
 
 public class Photo {
+
+    private int id;
+
     private Boolean vertical;
 
     private Boolean horizontal;
 
     private List<String> tags;
 
-    public Photo(Boolean vertical, Boolean horizontal, List<String> tags) {
+    public Photo(int id, Boolean vertical, Boolean horizontal, List<String> tags) {
+        this.id = id;
         this.vertical = vertical;
         this.horizontal = horizontal;
         this.tags = tags;
@@ -37,5 +41,17 @@ public class Photo {
 
     public void setTags(List<String> tags) {
         this.tags = tags;
+    }
+
+    public void addTags(String tag) {
+        this.tags.add(tag);
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
