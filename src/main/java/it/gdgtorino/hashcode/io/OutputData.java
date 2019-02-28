@@ -23,6 +23,7 @@
  */
 package it.gdgtorino.hashcode.io;
 
+import it.gdgtorino.hashcode.model.Photo;
 import it.gdgtorino.hashcode.model.Slide;
 
 import java.util.List;
@@ -35,9 +36,10 @@ import java.util.List;
  */
 public class OutputData {
 
-    public List<Slide> slideshow;
+    //public List<Slide> slideshow;
+    public List<Photo> slideshow;
 
-    public OutputData ( List<Slide> slideshow ) {
+    public OutputData ( List<Photo> slideshow ) {
         this.slideshow = slideshow;
     }
 

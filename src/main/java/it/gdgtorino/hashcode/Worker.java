@@ -25,9 +25,12 @@ package it.gdgtorino.hashcode;
 
 import it.gdgtorino.hashcode.io.InputData;
 import it.gdgtorino.hashcode.io.OutputData;
+import it.gdgtorino.hashcode.model.Photo;
 import it.gdgtorino.hashcode.model.Slide;
 import it.gdgtorino.hashcode.utils.Utility;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -80,7 +83,9 @@ public class Worker {
         // Initial input acquisition
         inputData = utils.read(inputFile);
 
-        List<Slide> slideshow = new SlideTreeWorker( inputData ).walk();
+        //List<Slide> slideshow = new SlideTreeWorker( inputData ).walk();
+        //List<String> slideshow = new SlideTreeWorker( inputData ).walk2();
+        List<Photo> slideshow = this.iteratif( inputData );
 
         // Intermediate elaboration
         outputData = new OutputData(slideshow);
@@ -91,5 +96,50 @@ public class Worker {
         utils.write(outputData, outputFile);
 
         System.out.println("Main execution correctly completed");
+    }
+
+    public List<Photo> iteratif( InputData intpuData ){
+        Utility uti = Utility.getInstance();
+        List<Photo> photos = intpuData.getPhotosHorizontales();
+
+        LinkedList<Photo> slideshow = new LinkedList<>();
+        slideshow.add( photos.get(0) );
+        int totalScore = 0;
+
+        for( int i = 1; i < photos.size(); i++ ){
+            System.out.println( i + " / " + photos.size() );
+            Photo newPhoto = photos.get( i );
+            int bestScore = totalScore;
+            int bestPos = 0;
+
+            for( int j = 0; j < slideshow.size(); j++ ){
+                int newScore;
+
+                if( j == 0 ){
+                    Photo next = slideshow.get( j );
+                    newScore = totalScore + uti.calculateScore2( newPhoto.getTags(), next.getTags() );
+                }
+                else if ( j == slideshow.size() - 1 ){
+                    Photo previous = slideshow.get( j-1 );
+                    newScore = totalScore + uti.calculateScore2( newPhoto.getTags(), previous.getTags() );
+                }
+                else {
+                    Photo previous = slideshow.get( j-1 );
+                    Photo next = slideshow.get( j );
+                    newScore = totalScore + uti.calculateScore2( newPhoto.getTags(), previous.getTags() )
+                            + uti.calculateScore2( newPhoto.getTags(), next.getTags() )
+                            - uti.calculateScore2( next.getTags(), next.getTags() );
+                }
+
+                if( newScore > bestScore ){
+                    bestScore = newScore;
+                    bestPos = j;
+                }
+            }
+
+            slideshow.add( bestPos, newPhoto );
+        }
+
+        return slideshow;
     }
 }

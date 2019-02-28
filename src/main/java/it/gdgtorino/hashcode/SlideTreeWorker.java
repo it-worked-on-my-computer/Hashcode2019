@@ -18,13 +18,15 @@ public class SlideTreeWorker {
     Map<Integer, Node> verticalPhotoTree;
 
     Map<String, Node> slideTree;
+    Integer[][] graph;
 
     public SlideTreeWorker(InputData inputData /*, Map<Integer, Node> verticalPhotoTree */ ) {
         this.photosHorizontales = inputData.getPhotosHorizontales();
         this.photosVerticales = inputData.getPhotosVerticales();
         //this.verticalPhotoTree = verticalPhotoTree;
 
-        this.slideTree = new HashMap<>();
+        //this.slideTree = new HashMap<>();
+        this.graph = new Integer[this.photosHorizontales.size()][this.photosHorizontales.size()];
     }
 
     public List<Slide> walk(){
@@ -55,22 +57,64 @@ public class SlideTreeWorker {
             }
         }
 
+        System.out.println( "Slideshow score : " + Utility.getInstance().getScore( slideshow ) );
         return slideshow;
     }
+
+    public List<String> walk2(){
+        this.buildTree();
+        List<String> slideshow = new ArrayList<>();
+
+        int id = 0;
+        while( true ){
+            slideshow.add( this.photosHorizontales.get( id ).getId() );
+
+            int bestScore = 0;
+            int bestId = -1;
+            for( int i = 0; i < this.photosHorizontales.size(); i++ ){
+                if( i != id && this.graph[id][i] > bestScore ){
+                    bestScore = this.graph[id][i];
+                    bestId = i;
+                }
+            }
+
+            if( bestScore > 0 ){
+                for( int j = 0; j < this.photosHorizontales.size(); j++ ){
+                    this.graph[j][bestId] = -1;
+                }
+                id = bestId;
+            } else {
+                break;
+            }
+        }
+
+        return slideshow;
+    }
+
 
     public void buildTree() {
         Utility utility = Utility.getInstance();
 
-        for (Photo photo : this.photosHorizontales) {
+        for( int i = 0; i < this.photosHorizontales.size() ; i++ ){
+            Photo photo = this.photosHorizontales.get(i);
+
             // Créer le slide
+            /*
             Slide newSlide = new Slide();
             newSlide.setId(photo.getId());
             newSlide.addTags(photo.getTags());
+            */
 
+            for( int j = 0; j < this.photosHorizontales.size(); j++ ){
+                if( i != j ){
+                    this.graph[i][j] = utility.calculateScore2( photo.getTags(), this.photosHorizontales.get(j).getTags() );
+                }
+            }
             // Créer le noeud
-            Node<Slide> currentNode = new Node<>(newSlide.id, newSlide);
+            //Node<Slide> currentNode = new Node<>(newSlide.id, newSlide);
 
             // Itérer sur les noeud existantd
+            /*
             for (Node<Slide> node : slideTree.values()) {
                 // calculer le score avec le slide créé précédemment
                 int score = utility.calculateScore(currentNode.element, node.element);
@@ -82,6 +126,7 @@ public class SlideTreeWorker {
 
             // ajouter le noeud courant au graphe
             this.slideTree.put(currentNode.id, currentNode);
+            */
         }
     }
 

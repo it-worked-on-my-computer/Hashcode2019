@@ -145,8 +145,9 @@ public class Utility {
         try (
             PrintWriter pw = new PrintWriter(file)) { // use of PrintWriter instead of FileWriter
             pw.println( outputData.slideshow.size() );
-            for( Slide slide : outputData.slideshow ){
-                pw.println( slide.id );
+            //for( Slide slide : outputData.slideshow ){
+            for( Photo photo : outputData.slideshow ){
+                pw.println( photo.getId() );
             }
         } catch (IOException ex) {
             System.err.println(MSG_ERR_FIND_OUTPUT_FILE);
@@ -154,6 +155,7 @@ public class Utility {
         }
 
         System.out.println("Output data file completed");
+        System.out.println();
     }
 
 	public int getScore(List<Slide> slides) {
@@ -182,4 +184,24 @@ public class Utility {
 
 		return resultat;
 	}
+
+	public int calculateScore2( List<String> tags1, List<String> tags2 ){
+        int tagCommun = 0;
+        int tagIndep1 = 0;
+        int tagIndep2 = 0;
+        int resultat = 0;
+
+        for (String tag : tags1) {
+            if (tags2.contains(tag)) {
+                tagCommun++;
+            }
+        }
+        tagIndep1 = tags1.size() - tagCommun;
+        tagIndep2 = tags2.size() - tagCommun;
+
+        resultat = Math.min(tagIndep1, tagCommun);
+        resultat = Math.min(tagIndep2, resultat);
+
+        return resultat;
+    }
 }

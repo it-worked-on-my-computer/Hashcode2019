@@ -38,7 +38,7 @@ public class App {
         worker.execute(Constants.INPUT_FILENAME1, Constants.OUTPUT_FILENAME1);
         worker.execute(Constants.INPUT_FILENAME2, Constants.OUTPUT_FILENAME2);
         worker.execute(Constants.INPUT_FILENAME3, Constants.OUTPUT_FILENAME3);
-        worker.execute(Constants.INPUT_FILENAME4, Constants.OUTPUT_FILENAME4);
-        worker.execute(Constants.INPUT_FILENAME5, Constants.OUTPUT_FILENAME5);
+        //worker.execute(Constants.INPUT_FILENAME4, Constants.OUTPUT_FILENAME4);
+        //worker.execute(Constants.INPUT_FILENAME5, Constants.OUTPUT_FILENAME5);
     }
 }
