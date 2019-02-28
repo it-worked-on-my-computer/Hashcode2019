@@ -4,6 +4,6 @@ import java.util.List;
 
 public class Tree {
 
-    List<Vertex> vertices;
+    public List<Vertex> vertices;
 
 }

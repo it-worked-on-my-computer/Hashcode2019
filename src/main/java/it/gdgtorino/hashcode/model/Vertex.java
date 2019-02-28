@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Vertex {
 
-    List<Node> nodes;
-    int weight;
+    public List<Node> nodes;
+    public int weight;
 
 }
