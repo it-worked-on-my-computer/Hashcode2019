@@ -25,11 +25,14 @@ package it.gdgtorino.hashcode.utils;
 
 import it.gdgtorino.hashcode.io.InputData;
 import it.gdgtorino.hashcode.io.OutputData;
+import it.gdgtorino.hashcode.model.Photo;
+
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Reader;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import static it.gdgtorino.hashcode.utils.Constants.INPUT_FILENAME;
@@ -84,15 +87,33 @@ public class Utility {
         ClassLoader classLoader = getClass().getClassLoader(); // classloader useful to localize the file
         File file = new File(classLoader.getResource(INPUT_FILENAME).getFile()); // file loading
         try (
-                Reader r = new FileReader(file);
-                Scanner s = new Scanner(r)) {
+            Reader r = new FileReader(file);
+            Scanner s = new Scanner(r)) {
             // First line acquisition
             inputData.setFirstValue(s.nextInt());
 
-            // Following lines acquisition
-            /*
-             * In this section the remaining lines of the input file are read
-             */
+            int i = 0;
+            while(i < inputData.getFirstValue()){
+                String type = s.next();
+                Boolean isVertical = type.equals("V");
+                int tagCount = s.nextInt();
+                int j = 0;
+                ArrayList<String> tags = new ArrayList<String>();
+                while(j < tagCount){
+                    tags.add(s.next());
+                    j++;
+                }
+                Photo p = new Photo(i,isVertical,!isVertical,tags);
+                if(p.isHorizontal()){
+                    inputData.addPhotosHorizontales(p);
+                }else{
+                    inputData.addPhotosVerticales(p);
+                }
+                i++;
+            }
+
+
+
         } catch (IOException ex) {
             System.err.println(MSG_ERR_FIND_INPUT_FILE);
             throw new RuntimeException(MSG_ERR_FIND_INPUT_FILE, ex);

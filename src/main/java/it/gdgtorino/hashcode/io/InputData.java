@@ -25,6 +25,7 @@ package it.gdgtorino.hashcode.io;
 
 import it.gdgtorino.hashcode.model.Photo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -48,8 +49,8 @@ public class InputData {
 
     public InputData (int firstValue, List<Photo> photosVerticales, List<Photo> photosHorizontales) {
         this.firstValue = firstValue;
-        this.photosVerticales = photosVerticales;
-        this.photosHorizontales = photosHorizontales;
+        this.photosVerticales = new ArrayList<Photo>();
+        this.photosHorizontales = new ArrayList<Photo>();
     }
 
     public int getFirstValue () {
